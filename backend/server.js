@@ -64,7 +64,7 @@ server.on("listening", () => {
 
 mongoose
   .connect(
-    "mongodb+srv://DemoUser:DemoPass@atlascluster.uhn2qkr.mongodb.net/?retryWrites=true&w=majority",
+    "mongodb+srv://*****************@atlascluster.uhn2qkr.mongodb.net/?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
