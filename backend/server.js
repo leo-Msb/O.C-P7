@@ -1,5 +1,5 @@
 const http = require("http");
-// const app = require('./app');
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -64,8 +64,9 @@ server.on("listening", () => {
 
 mongoose
   .connect(
-    "mongodb+srv://DemoUser:DemoPass@atlascluster.uhn2qkr.mongodb.net/?retryWrites=true&w=majority",
+    process.env.MongoDB_URL,
     { useNewUrlParser: true, useUnifiedTopology: true }
+    
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));

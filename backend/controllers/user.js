@@ -1,11 +1,27 @@
+require('dotenv').config();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../models/user");
 
 exports.signup = (req, res, next) => {
-  console.log(req.body.email)
-  console.log(req.body.password)
+ 
+  const email = req.body.email;
+  const password = req.body.password;
+
+  if (!email.includes('@')) {
+    return res
+      .status(400)
+      .json({ message: "L'adresse e-mail est invalide." });
+  }
+
+  const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{15,})/;
+  if (!passwordRegex.test(password)) {
+    return res
+      .status(400)
+      .json({ message: "Le mot de passe doit contenir au moins une majuscule, un caractère spécial et avoir une longueur minimale de 15 caractères." });
+  }
+
   bcrypt
     .hash(req.body.password, 10)
     .then(hash => {
@@ -41,7 +57,7 @@ exports.login = (req, res, next) => {
             } else {
               res.status(200).json({
                 userId: user._id,
-                token: jwt.sign({ userId: user._id }, "RAMDOM_TOKEN_SECRET", {
+                token: jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
                   expiresIn: "12h",
                 }),
               });
