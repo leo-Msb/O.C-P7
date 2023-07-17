@@ -1,5 +1,8 @@
 const http = require("http");
+<<<<<<< HEAD
 require('dotenv').config();
+=======
+>>>>>>> e08c9cd65ccfde1e9f2358cce0e3c9cf307c16b8
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -64,7 +67,11 @@ server.on("listening", () => {
 
 mongoose
   .connect(
+<<<<<<< HEAD
     process.env.MongoDB_URL,
+=======
+    "mongodb+srv://*****************@atlascluster.uhn2qkr.mongodb.net/?retryWrites=true&w=majority",
+>>>>>>> e08c9cd65ccfde1e9f2358cce0e3c9cf307c16b8
     { useNewUrlParser: true, useUnifiedTopology: true }
     
   )
